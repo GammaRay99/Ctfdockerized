@@ -1,0 +1,26 @@
+{% extends "admin/challenges/create.html" %}
+{% block category %}
+<div class="form-group">
+    <label>
+        Server:<br>
+        <small class="form-text text-muted">
+            The docker server of the challenge
+        </small>
+    </label>
+    <select name="server_id" class="form-control" id="server_select">
+        <option value="">-Select a server-</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="DockerImage" id='dockerimage_label'>
+    	Docker Image:
+    	<small class="form-text text-muted">
+            The docker image of the challenge
+        </small>
+    </label>
+    <select name="docker_image" class="form-control" id="image_select"></select>
+</div>
+{% endblock %}
+{% block type %}
+<input type="hidden" name="type" value="instancied" id="chaltype">
+{% endblock %}

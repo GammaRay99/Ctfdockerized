@@ -1,0 +1,79 @@
+{% extends 'admin/base.html' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('views.themes', theme='admin', path='css/challenge-board.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<script>
+function stopInstances() {
+    var check_boxs = document.querySelectorAll('.form-check-input');
+    for (var i = check_boxs.length - 1; i >= 0; i--) {
+        if (check_boxs[i].checked) {
+            if (check_boxs[i].id != "all-check") {
+                instance_id = check_boxs[i].value;
+                $.getJSON("/ctfdockerized/stop/?instance_id=" + instance_id, function(result){});
+                location.reload();
+            }
+        }
+    } 
+}
+</script>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Instances</h1>
+    </div>
+</div>
+<div class="container">
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="float-right pb-3">
+                <div class="btn-group" role="group">
+                    <button type="button" onclick="stopInstances();" class="btn btn-outline-danger" data-toggle="tooltip" title="Stop Instance" id="instance-stop-button">
+                        <i class="btn-fa fas fa-stop"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <div>
+                <table id="challenges" class="table table-striped border">
+                    <thead>
+                    <tr>
+                        <td class="d-block border-right border-bottom text-center" data-checkbox>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" autocomplete="off" id="all-check" data-checkbox-all>&nbsp;
+                            </div>
+                        </td>
+                        <th class="sort-col"><b>Challenge</b></th>
+                        <th class="sort-col"><b>User</b></th>
+                        <th class="sort-col"><b>Server</b></th>
+                        <th class="sort-col"><b>Status</b></th>
+                    </tr>
+                    </thead>
+                    
+                    {% for instance in instances %}
+                    <tbody>
+                        <td class="d-block border-right text-center" data-checkbox>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="{{ instance['id'] }}" autocomplete="off" data-challenge-id="{{ instance['id'] }}">&nbsp;
+                            </div>
+                        </td>
+                        <td class="text-center">{{ instance["challenge"] }}</td>
+                        <td><a href="/admin/users/{{ instance['userid'] }}">{{ instance["username"] }}</a></td>
+                        <td><a href="/admin/ctfdockerized/docker-servers/">{{ instance["servername"] }}</a></td>
+                        <td>{{ instance["status"] }}</td>   
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

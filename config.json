@@ -1,0 +1,26 @@
+[
+	{
+	    "name": "Docker Servers",
+	    "route": "/admin/ctfdockerized/docker-servers/"
+	},
+	{
+	    "name": "Add Docker Server",
+	    "route": "/admin/ctfdockerized/new-server/"
+	},
+	{
+	    "name": "---------------------",
+	    "route": "/admin"
+	},
+	{
+	    "name": "Instance List",
+	    "route": "/admin/ctfdockerized/instances/"
+	},
+	{
+	    "name": "Start Instance",
+	    "route": "/ctfdockerized/start/"
+	},
+	{
+	    "name": "Stop Instance",
+	    "route": "/ctfdockerized/stop/"
+	}
+]

@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div id="create-server">
+<form method="GET" action="/admin/ctfdockerized/new-server/" enctype="multipart/form-data">
+	{% block name %}
+	<div class="form-group">
+		<label>
+			Name:<br>
+			<small class="form-text text-muted">
+				The displayed name of your server
+			</small>
+		</label>
+		<input type="text" class="form-control" name="name" placeholder="Enter the custom server name">
+	</div>
+	{% endblock %}
+
+	{% block category %}
+	<div class="form-group">
+		<label>
+			Address:<br>
+			<small class="form-text text-muted">
+				The address of your server
+			</small>
+		</label>
+		<input type="text" class="form-control" name="addr" placeholder="Enter server's address (ip/domain)">
+	</div>
+	<div class="form-group">
+		<label>
+			Port:<br>
+			<small class="form-text text-muted">
+				The docker port of your server
+			</small>
+		</label>
+		<input type="text" class="form-control" name="port" placeholder="Enter server's port">
+	</div>
+	{% endblock %}
+
+	{% block submit %}
+	<div class="form-group">
+		<button class="btn btn-primary float-right create-server-submit" type="submit">Create</button>
+	</div>
+	{% endblock %}
+</form>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

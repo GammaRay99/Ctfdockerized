@@ -1,0 +1,72 @@
+{% extends 'admin/base.html' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ url_for('views.themes', theme='admin', path='css/challenge-board.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="jumbotron">
+	<div class="container">
+		<h1>Servers
+			<a class="no-decoration" href="/admin/ctfdockerized/new-server/">
+				<span role="button" data-toggle="tooltip" title="Add New Server">
+					<i class="btn-fa fas fa-plus-circle"></i>
+				</span>
+			</a>
+		</h1>
+	</div>
+</div>
+<div class="container">
+	<hr>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="float-right pb-3">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" title="Edit Server" id="server-edit-button">
+						<i class="btn-fa fas fa-pencil-alt"></i>
+					</button>
+					<button type="button" class="btn btn-outline-danger" data-toggle="tooltip" title="Delete Server" id="server-delete-button">
+						<i class="btn-fa fas fa-trash-alt"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 table-responsive">
+			<div>
+				<table id="challenges" class="table table-striped border">
+					<thead>
+					<tr>
+						<td class="d-block border-right border-bottom text-center" data-checkbox>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" autocomplete="off" data-checkbox-all>&nbsp;
+							</div>
+						</td>
+						<th class="sort-col text-center"><b>Name</b></th>
+						<th class="sort-col"><b>Server address</b></th>
+						<th class="sort-col"><b>Port</b></th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for server in servers %}
+						<tr data-href="/admin/ctfdockerized/server/{{ server.id }}">
+							<td class="d-block border-right text-center" data-checkbox>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" value="{{ server.id }}" autocomplete="off" data-challenge-id="{{ server.id }}">&nbsp;
+								</div>
+							</td>
+							<td class="text-center">{{ server.name }}</td>
+							<td><a href="/admin/ctfdockerized/server/{{ server.id }}">{{ server.address }}</a></td>
+							<td>{{ server.port }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

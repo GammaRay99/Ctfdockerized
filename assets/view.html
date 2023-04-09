@@ -1,0 +1,16 @@
+{% extends "challenge.html" %}
+{% block description %}
+{{ challenge.html }}
+<script>
+    challenge_id = {{ challenge.id }}
+    server_id = {{ challenge.server_id }}
+    setup_instance(challenge_id);
+</script>
+<div class='mb-3 text-center' id='instance_data'>
+    <span>
+        <a onclick="start_instance(challenge_id, server_id);" class='btn btn-dark'>
+            <small style='color:white;'><i class="fas fa-play"></i> Start Instance</small>
+        </a>
+    </span>
+</div>
+{% endblock %}

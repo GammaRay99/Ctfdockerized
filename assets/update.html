@@ -1,0 +1,25 @@
+{% extends "admin/challenges/update.html" %}
+{% block category %}
+<div class="form-group">
+    <label>
+        Category<br>
+        <small class="form-text text-muted">Challenge Category</small>
+    </label>
+    <input type="text" class="form-control chal-category" name="category" value="{{ challenge.category }}">
+</div>
+<div class="form-group">
+    <label for="DockerServer" id='docker_server_label'>Docker Server:
+        <select name="server_id" class="form-control" id="server_select"></select>
+    </label>
+    <br>
+    <label for="DockerImage" id='docker_image_label'>Docker image:
+        <select name="docker_image" class="form-control" id="image_select"></select>
+    </label>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+var docker_server = '{{ challenge.server_id }}';
+var docker_image = '{{ challenge.docker_image }}';
+</script>
+{% endblock %}
